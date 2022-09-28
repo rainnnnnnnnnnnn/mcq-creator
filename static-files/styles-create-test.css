@@ -1,0 +1,141 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: linear-gradient(120deg, #116ca8, #00e1ff);
+
+    overflow: hidden;
+    height: 100vh;
+}
+
+.main-container {
+    display: flex;
+}
+
+.create-container {
+    height: 100vh;
+    width: 45%;
+}
+
+.input-container {
+    height: 46%;
+    width: 70%;
+    padding: 30px 40px 0 30px;
+    background: linear-gradient(120deg, #00e1ff,  #2179b4);
+    position: relative;
+    top: 20%;
+    margin: auto;
+    border: 4px solid white;
+    border-radius: 40px;
+}
+
+.display-container {
+    background: none;
+    height: 100vh;
+    width: 55%;
+}
+
+.ques-container {
+    position: relative;
+    background-color: white;
+    margin: 20px auto;
+    height: 95vh;
+    width: 90%;
+    border-radius: 50px;
+    overflow-y: scroll;
+    padding: 20px 20px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.ques-container div {
+    margin: 10px;
+    padding: 30px 10px;
+    border-bottom: 1px solid #dbd9d9;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.ques-container div:hover {
+    background-color: #f0f0f0;
+}
+
+.ques-container div h5 {
+    font-size: 20px;
+    font-weight: 100;
+    margin: 5px 0 2px 20px; 
+    display: block;
+}
+
+.del-icon {
+    display: none;
+    position: relative;
+    left: 95%;
+    width: 30px;
+    height: 30px;
+    transition: 0.5s;
+    padding: 3px;
+    border-radius: 10px;
+}
+
+/*question input*/
+input {
+    font-family: 'Montserrat', sans-serif;
+    margin: 5px;
+    padding: 3px;
+    border-radius: 6px;
+    border-width: 0;
+    height: 30px;
+    font-size: 20px;
+    outline: none;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+.ques {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.opt {
+    margin-top: 10px;
+    width: 50%;
+}
+
+.ans {
+    margin-top: 20px;
+}
+
+button {
+    position: relative;
+    border: none;
+    background-color: #dbdbdb;
+    font-size: 15px;
+    border-radius: 20px;
+    margin: 25px 0;
+    padding: 10px 20px; 
+    transition: 0.3s;
+    font-family: 'Montserrat', sans-serif;
+}
+
+button:hover {
+    transform: translateY(10%);
+    background-color: white;
+}
+
+#submit {   
+    top: -20%;
+    left: 10%;
+} 
+
+h4 {
+    display: inline;
+    padding: 10px 0 0 0;
+}

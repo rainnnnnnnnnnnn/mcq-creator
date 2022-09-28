@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Create a test</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./styles-create-test.css">
+    </head>
+    <body>
+        <div class="main-container">
+            <div class="create-container">
+                <div class="input-container">
+                    <h4>Question 1 : </h4><br>
+                    <input class="ques" type="text" name="ques" size="75px"><br>
+                    <label>A: </label><input class="opt" type="text"><br>
+                    <label>B: </label><input class="opt" type="text"><br>
+                    <label>C: </label><input class="opt" type="text"><br>
+                    <label>D: </label><input class="opt" type="text"><br>
+                    Answer: <input class="ans" type="text"><br>
+                    <button id="add-q">Append</button>
+                    <!-- <input id="submit" type="submit" value="Create test"> -->
+                    <button id="submit" style="margin-left: 403px;">Create test</button>  
+                </div>
+            </div>
+            <div class="display-container">
+                <div class="ques-container">
+                    
+                </div>
+            </div>   
+        </div>                            
+        <script type="text/javascript" defer>
+            function populate(Q) {
+                let prev_test = JSON.parse(localStorage.getItem('Test'))?? []
+                if(Q){prev_test.push(Q)}
+                localStorage.setItem('Test', JSON.stringify(prev_test))
+
+                //display
+                let test_div = document.getElementsByClassName("ques-container")[0]
+
+                let start = test_div.innerText?prev_test.length-1:0;
+                
+                for(let i=start; i<prev_test.length; i++) {
+
+                    //question element
+                    let qdiv = document.createElement('div')
+                    let qe = document.createElement('h4')
+                    qe.textContent = `${i+1} . ${prev_test[i].statement}`
+                    qdiv.append(qe)
+
+                    //current option
+                    let index = 0
+                    let option_arr = ["A", "B", "C", "D"]       
+                    prev_test[i].options.forEach((option) => {
+                        let co = document.createElement('h5')
+                        co.textContent = option_arr[index++] + ". " + option
+                        qdiv.append(co)
+                    })
+
+                    //delete icon
+                    let del = document.createElement('img')
+                    del.src = "./delete.svg"
+                    del.className = "del-icon"
+                    del.title = "Delete"
+
+                    del.addEventListener("mouseover", () => {
+                        del.style.backgroundColor =  "white"
+                    })
+
+                    del.addEventListener("mouseleave", () => {
+                        del.style.backgroundColor = ""
+                    })
+
+                    del.addEventListener("click", () => {
+                        let index = parseInt(del.parentElement.innerText)-1
+                        let prev_test = JSON.parse(localStorage.getItem('Test'))
+                        prev_test = prev_test.filter((ques, i) => i!=index)
+                        localStorage.setItem('Test', JSON.stringify(prev_test))
+                        location.reload()
+                    })
+
+                    qdiv.addEventListener("mouseover",() => {
+                        qdiv.lastChild.style.display = "inline"
+                    })
+
+                    qdiv.addEventListener("mouseleave", () => {
+                        qdiv.lastChild.style.display = "none"
+                    })
+
+                    qdiv.append(del)
+
+                    test_div.append(qdiv)
+                }
+
+                //incr Question no.                                                                                                 
+                let q_nos = prev_test.length+1 || 1
+                let q_heading = document.getElementsByTagName('h4')[0]
+                q_heading.textContent = 'Question ' + (q_nos++) + ":"
+                localStorage.setItem('nos', q_nos)
+
+                clearAll()
+            }
+
+            window.addEventListener('DOMContentLoaded', populate(null))
+
+            //clear fields 
+            function clearAll() {
+                document.getElementsByClassName("ques")[0].value = ""
+                document.getElementsByClassName('ans')[0].value = ""
+                Array.from(document.getElementsByClassName("opt")).forEach(element => {
+                    element.value = ""
+                })
+            }
+
+            //Creates test, & stores it in localStorage
+            let button = document.getElementById("add-q")
+            button.onclick = () => {
+                event.preventDefault()  //no refresh
+                
+                //question object                                                                                                      <---
+                let ques = document.getElementsByClassName("ques")[0]
+                let options = []
+                Array.from(document.getElementsByClassName("opt")).forEach(element => {
+                    options.push(element.value)
+                });
+                let ans = document.getElementsByClassName('ans')[0]
+
+                const Q = {
+                    statement: ques.value,
+                    options: options,
+                    answer: ans.value
+                }
+
+                if(ques.value && ans.value) populate(Q)
+                else alert("Wrong input G")
+            }
+            
+            let submitted_in_this_session = []
+
+            //POST req  URL: https//localhost:3000/                                                                                    <---
+            let submit_test = document.getElementById("submit")
+            submit_test.onclick = () => {
+
+                let test = JSON.parse(localStorage.getItem('Test'))
+                let test_name_user = prompt("Enter a test name : ")
+                let i = 0;
+
+                while(!test_name_user && i<3) {
+                    test_name_user = prompt("Enter a valid test name : ")
+                    i++
+                }
+
+                test.unshift(test_name_user || "Fake test")
+
+                // confirm("Are you sure you want to submit?")
+                fetch('http://localhost:3000/create-test', {
+                    method: 'POST',
+                    body: JSON.stringify(test),
+                    headers: {
+                        'Content-type': 'application/json; charset=UTF-8'
+                    }
+                })
+                .then(console.log("OK"))
+
+                //clear localStorage after POST request                                                                                 <---
+                localStorage.clear()
+                //temp clear
+                document.getElementsByClassName("ques-container")[0].innerHTML = ""
+                document.getElementsByTagName("h4")[0].innerHTML = "Question 1:"
+            }
+        </script>
+    </body>
+</html>

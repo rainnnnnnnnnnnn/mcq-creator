@@ -1,0 +1,214 @@
+                                                    /*common*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    /*
+        'Montserrat'
+        'Lato'
+        'Open Sans'
+    */
+    background: linear-gradient(90deg, #0d70b3,  #00e1ff);
+    height: 100vh;
+    overflow: hidden;
+}
+
+.header {
+    margin: 0;
+    padding: 0;
+    height: 10%;
+    background-color: white;
+}
+
+.header img {
+    position: absolute;
+    top: 3.5%;
+    left: 2%;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    position: relative;
+    display: inline;
+    top: 40%;
+    left: 5%;
+    color: black;
+    font-size: 25px;
+    height: 100px;
+}
+
+a {
+    position: relative;
+    left: 70%;
+    padding: 10px 20px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    background-color: #3f96cf;
+    border-radius: 20px;
+}
+
+a:hover {
+    background-color: #0d70b3;
+    transition: 0.2s;
+}
+
+                                                    /* student */
+.main-container {
+    display: flex;
+    height: 100%;
+}
+
+.table-container {
+    width: 60%;
+    border-right: 5px solid white;
+}
+
+.table-bg {
+    overflow-y: scroll;
+    margin-top: 200px;
+    position: relative;
+    width: 50%;
+    height: 75%;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+table {
+    margin: auto;
+    width: 90%;
+    text-align: center;
+    border: none;
+    border-collapse: collapse;
+}
+
+.col_names {
+    background-color:#2691d9;
+    color: white;
+}
+
+.col_names:hover {
+    background-color: #2691d9;
+}
+
+tr:hover {
+    background-color: #f5f5f5;
+    cursor: pointer;
+}
+
+td {
+    margin: 0;
+    padding: 15px 10px;
+    border-bottom: 1px solid #adadad;
+}
+
+td h3 {
+    margin: 0;
+    padding: 0
+}
+
+.form-container {
+    width: 40%;
+}
+
+.form-bg {
+    margin-top: 200px;
+    position: relative;
+    width: 50%;
+    height: 15%;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-block;
+    padding: 20px;
+    background-color: white;
+    border-radius: 20px;
+}
+
+form {
+    position: relative;
+    top: 20%;
+}
+
+form .text_field {
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 10px 0;
+}
+
+.text_field input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+}  
+
+.text_field label {
+    position: absolute;
+    top: 25%;
+    left: 5px;
+    color: #adadad;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
+.text_field span::before {
+    content: '';
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background: #2691d9;
+    transition: 0.5s;
+}
+
+.text_field input:focus ~label,
+.text_field input:valid ~label {
+    top: -8px;
+    color: #2691d9;
+}
+
+.text_field input:focus ~span::before,
+.text_field input:valid ~span::before {
+    width: 100%;
+}
+
+input[type="submit"] {
+    position: relative;
+    margin-top: 20px;
+    top: 10%;
+    left: 35%;
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    background-color: #3f96cf;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+}
+
+input[type="submit"]:hover {
+    background-color: #0d70b3;
+    transition: 0.2s;
+}
+
+                                                   /* instructor */
